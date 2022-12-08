@@ -6,8 +6,8 @@ plugins {
 
 allprojects {
 	group = 'co.com.poli'
-	version = '0.0.1-SNAPSHOT'
-	sourceCompatibility = '17'
+	version = '0.0.1'
+	sourceCompatibility = JavaVersion.VERSION_11
 
 	repositories {
 		mavenCentral()

@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: file:///C:/Users/aleja/IdeaProjects/taller2-pds-config-data
+          uri: https://github.com/CarlosMatiz2/taller2-pds-config-data
   security:
     user:
       name: ${CONFIG_USER}
