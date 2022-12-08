@@ -2,3 +2,4 @@ rootProject.name = 'taller2-pds'
 
 include 'config-service'
 include 'users-service'
+include 'movies-service'
