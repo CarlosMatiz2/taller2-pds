@@ -1,4 +1,4 @@
-package co.com.poli.moviesservice;
+package co.com.poli.moviesservice.controller;
 
 import co.com.poli.moviesservice.helpers.Response;
 import co.com.poli.moviesservice.helpers.ResponseBuild;

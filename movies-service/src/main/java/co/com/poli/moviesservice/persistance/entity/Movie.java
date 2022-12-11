@@ -27,8 +27,8 @@ public class Movie {
     @Column(name = "director")
     private String director;
 
-    @Min(1)
-    @Max(5)
+    @Min(value = 1, message = "El rating debe estar entre 1 a 5")
+    @Max(value = 5, message = "El rating debe estar entre 1 a 5")
     @Column(name = "rating")
     private int rating;
 
