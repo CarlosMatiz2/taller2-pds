@@ -1,5 +1,6 @@
 ext {
 	set('springCloudVersion', "2021.0.5")
+	set('springAdminVersion', "2.7.7")
 }
 
 dependencies {
@@ -16,10 +17,12 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.5.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'de.codecentric:spring-boot-admin-starter-client'
 }
 
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springAdminVersion}"
 	}
 }
