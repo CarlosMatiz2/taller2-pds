@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findById(String id) {
         return userRepository.findById(Long.valueOf(id)).orElse(null);
     }
