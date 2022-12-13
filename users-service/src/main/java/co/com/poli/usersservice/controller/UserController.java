@@ -40,7 +40,16 @@ public class UserController {
         if(user == null){
             return builder.failed("Not found");
         }
-        userService.delete(user);
+        userService.delete(id);
+        return builder.success(user);
+    }
+
+    @GetMapping("/{id}")
+    public Response getById(@PathVariable("id") String id){
+        User user = userService.findById(id);
+        if(user == null){
+            return builder.failed("Not found");
+        }
         return builder.success(user);
     }
 

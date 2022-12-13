@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(User user) {
-        userRepository.delete(user);
+    public void delete(String id) {
+        userRepository.deleteById(Long.valueOf(id));
     }
 
     @Override

@@ -49,7 +49,7 @@ public class MovieController {
         if(movie == null){
             return builder.failed("Not found");
         }
-        movieService.delete(movie);
+        movieService.delete(id);
         return builder.success(movie);
     }
 

@@ -7,6 +7,7 @@ import co.com.poli.showtimesservice.persistance.repository.ShowtimeRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ShowtimeServiceImpl implements ShowtimeService{
     private final MovieClient movieClient;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Showtime> findAll() {
         List<Showtime> showtimeList = showtimeRepository.findAll();
         for (Showtime showtime: showtimeList) {
@@ -29,11 +31,13 @@ public class ShowtimeServiceImpl implements ShowtimeService{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(Showtime showtime) {
         showtimeRepository.save(showtime);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Showtime findById(String id) {
         Showtime showtime = showtimeRepository.findById(Long.valueOf(id)).orElse(null);
         if(showtime == null || showtime.getMovies() == null || showtime.getMovies().isEmpty()){
@@ -44,6 +48,7 @@ public class ShowtimeServiceImpl implements ShowtimeService{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateById(Showtime showtimeToUpdate, Showtime showtime) {
         showtimeToUpdate.setDate(showtime.getDate());
         showtimeToUpdate.setMovies(showtime.getMovies());
