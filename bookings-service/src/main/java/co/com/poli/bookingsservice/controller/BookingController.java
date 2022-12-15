@@ -86,6 +86,12 @@ public class BookingController {
         return builder.success(bookingList);
     }
 
+    @GetMapping("/movie/{id}")
+    public Response checkIfMovieIsAssigned(@PathVariable("id") String id){
+        Boolean movieIsNotAssigned = bookingService.checkIfMovieIsAssigned(id);
+        return builder.success(movieIsNotAssigned);
+    }
+
     public Boolean validUser(Long userId) {
         ModelMapper modelMapper = new ModelMapper();
         User user = modelMapper.map(userClient.findByID(userId.toString()).getData(), User.class);

@@ -10,4 +10,6 @@ public interface ShowtimeService {
     void save(Showtime user);
     Showtime findById(String id);
     void updateById(Showtime showtimeToUpdate, Showtime showtime);
+    Boolean checkIfMovieIsAssigned(String id);
+
 }

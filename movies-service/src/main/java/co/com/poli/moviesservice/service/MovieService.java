@@ -9,5 +9,5 @@ public interface MovieService {
     List<Movie> findAll();
     void save(Movie user);
     Movie findById(String id);
-    void delete(String id);
+    Boolean delete(String id);
 }

@@ -10,6 +10,6 @@ public interface BookingService {
     void save(Booking booking);
     Booking findById(String id);
     void delete(String id);
-
     List<Booking> findByUserId(String id);
+    Boolean checkIfMovieIsAssigned(String id);
 }

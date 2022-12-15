@@ -1,8 +1,11 @@
 package co.com.poli.moviesservice.service;
 
+import co.com.poli.moviesservice.clientFeign.BookingClient;
+import co.com.poli.moviesservice.clientFeign.ShowtimeClient;
 import co.com.poli.moviesservice.persistance.entity.Movie;
 import co.com.poli.moviesservice.persistance.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +16,9 @@ import java.util.List;
 public class MovieServiceImpl implements MovieService{
 
     private final MovieRepository movieRepository;
+
+    private final ShowtimeClient showtimeClient;
+    private final BookingClient bookingClient;
 
     @Override
     @Transactional(readOnly = true)
@@ -34,7 +40,15 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(String id) {
-        movieRepository.deleteById(Long.valueOf(id));
+    public Boolean delete(String id) {
+        boolean wasDeleted = false;
+        ModelMapper modelMapper = new ModelMapper();
+        Boolean movieIsAssignedOnShowtime = modelMapper.map(showtimeClient.checkIfMovieIsAssigned(id).getData(), Boolean.class);
+        Boolean movieIsAssignedOnBooking= modelMapper.map(bookingClient.checkIfMovieIsAssigned(id).getData(), Boolean.class);
+        if(!movieIsAssignedOnShowtime && !movieIsAssignedOnBooking) {
+            movieRepository.deleteById(Long.valueOf(id));
+            wasDeleted = true;
+        }
+        return wasDeleted;
     }
 }

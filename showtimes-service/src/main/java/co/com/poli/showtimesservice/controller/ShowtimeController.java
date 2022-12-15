@@ -58,8 +58,17 @@ public class ShowtimeController {
         if(showtimeToUpdate == null){
             return builder.failed("Not found");
         }
+        if(!validMovies(showtime.getMovies())){
+            return builder.failed("Movies not found");
+        }
         showtimeService.updateById(showtimeToUpdate, showtime);
         return builder.success();
+    }
+
+    @GetMapping("/movie/{id}")
+    public Response checkIfMovieIsAssigned(@PathVariable("id") String id){
+        Boolean movieIsNotAssigned = showtimeService.checkIfMovieIsAssigned(id);
+        return builder.success(movieIsNotAssigned);
     }
 
     public Boolean validMovies(Collection<Long> moviesIds) {
@@ -73,4 +82,5 @@ public class ShowtimeController {
         return true;
     }
 
-}
+
+    }

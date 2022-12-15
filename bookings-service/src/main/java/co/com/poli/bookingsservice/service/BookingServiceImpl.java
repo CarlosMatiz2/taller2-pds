@@ -86,6 +86,14 @@ public class BookingServiceImpl implements BookingService{
         return bookingList;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean checkIfMovieIsAssigned(String id) {
+        List<Booking> bookingList = bookingRepository.findAll().stream().
+                filter(booking -> booking.getMovies().contains(Long.valueOf(id))).toList();
+        return !bookingList.isEmpty();
+    }
+
     private void getMovieInfo(Booking booking) {
         List<Movie> movies = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();

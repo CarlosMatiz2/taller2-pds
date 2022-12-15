@@ -49,8 +49,12 @@ public class MovieController {
         if(movie == null){
             return builder.failed("Not found");
         }
-        movieService.delete(id);
-        return builder.success(movie);
+        Boolean wasDeleted = movieService.delete(id);
+        if(wasDeleted){
+            return builder.success("Deleted successfully");
+        }else{
+            return builder.failed("Movie cannot be deleted because is assigned on booking or showtime");
+        }
     }
 
 }

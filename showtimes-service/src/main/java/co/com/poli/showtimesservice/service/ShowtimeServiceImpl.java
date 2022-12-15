@@ -65,4 +65,12 @@ public class ShowtimeServiceImpl implements ShowtimeService{
         showtime.setMovies_list(movies);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean checkIfMovieIsAssigned(String id) {
+        List<Showtime> showtimeList = showtimeRepository.findAll().stream().
+                filter(showtime -> showtime.getMovies().contains(Long.valueOf(id))).toList();
+        return !showtimeList.isEmpty();
+    }
+
 }
