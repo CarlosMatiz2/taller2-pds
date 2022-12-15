@@ -40,8 +40,12 @@ public class UserController {
         if(user == null){
             return builder.failed("Not found");
         }
-        userService.delete(id);
-        return builder.success(user);
+        Boolean wasDeleted = userService.delete(id);
+        if(wasDeleted){
+            return builder.success("Deleted successfully");
+        }else{
+            return builder.failed("User cannot be deleted because of Bookings already made");
+        }
     }
 
     @GetMapping("/{id}")

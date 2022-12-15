@@ -8,7 +8,7 @@ public interface UserService {
 
     List<User> findAll();
     void save(User user);
-    void delete(String id);
+    Boolean delete(String id);
     User findById(String id);
 
 
